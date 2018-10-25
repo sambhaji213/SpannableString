@@ -17,7 +17,6 @@ import android.text.style.SubscriptSpan;
 import android.text.style.SuperscriptSpan;
 import android.text.style.URLSpan;
 import android.text.style.UnderlineSpan;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -30,10 +29,13 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
+    private TextView textView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        textView = findViewById(R.id.textView);
 
         SpannableString styledString
                 = new SpannableString("Large\n\n"     // index 0 - 5
@@ -93,18 +95,12 @@ public class MainActivity extends AppCompatActivity {
 
         styledString.setSpan(clickableSpan, 103, 112, 0);
 
-        // Give the styled string to a TextView
-        TextView textView = new TextView(this);
-
         // this step is mandated for the url and clickable styles.
         textView.setMovementMethod(LinkMovementMethod.getInstance());
 
         // make it neat
-        textView.setGravity(Gravity.CENTER);
-        textView.setBackgroundColor(Color.WHITE);
         textView.setText(styledString);
         textView.setTextSize(18);
-        setContentView(textView);
     }
 
     @Override
